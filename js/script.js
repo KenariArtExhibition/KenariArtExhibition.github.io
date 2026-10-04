@@ -1,3 +1,662 @@
+/* =====================================================
+   PORTFOLIO JAVASCRIPT
+   HOME + NAVBAR + 3 IMAGE SLIDESHOW + TYPING
+===================================================== */
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const navbar =
+    document.getElementById("navbar");
+
+
+const slides =
+    document.querySelectorAll(".hero-slide");
+
+
+const currentSlide =
+    document.getElementById("current-slide");
+
+
+const progressBar =
+    document.getElementById("slide-progress-bar");
+
+
+const menuToggle =
+    document.querySelector(".menu-toggle");
+
+
+const navMenu =
+    document.querySelector(".nav-menu");
+
+
+const navLinks =
+    document.querySelectorAll(".nav-menu a");
+
+
+const typingRole =
+    document.getElementById("typing-role");
+
+
+
+/* =====================================================
+   SETTINGS/
+===================================================== */
+
+const slideDuration = 5000;
+
+const fadeDuration = 1800;
+
+
+
+/* =====================================================
+   SLIDE VARIABLES
+===================================================== */
+
+let currentIndex = 0;
+
+let slideTimer = null;
+
+let progressTimer = null;
+
+
+
+/* =====================================================
+   IMAGE SOURCES
+===================================================== */
+
+const imageSources = [
+
+    "assets/images/home1.jpg",
+
+    "assets/images/home2.jpg",
+
+    "assets/images/home3.jpg"
+
+];
+
+
+
+/* =====================================================
+   PRELOAD IMAGE
+===================================================== */
+
+function preloadImage(source) {
+
+    return new Promise(function (resolve) {
+
+        const image =
+            new Image();
+
+
+        image.onload = async function () {
+
+            try {
+
+                if (
+                    typeof image.decode ===
+                    "function"
+                ) {
+
+                    await image.decode();
+
+                }
+
+            } catch (error) {
+
+                /*
+                    Browser tertentu mungkin
+                    tidak mendukung decode.
+                    Gambar tetap digunakan.
+                */
+
+            }
+
+
+            resolve(image);
+
+        };
+
+
+        image.onerror = function () {
+
+            resolve(image);
+
+        };
+
+
+        image.src = source;
+
+    });
+
+}
+
+
+
+/* =====================================================
+   PRELOAD ALL IMAGES
+===================================================== */
+
+async function preloadAllImages() {
+
+    await Promise.all(
+
+        imageSources.map(
+            function (source) {
+
+                return preloadImage(
+                    source
+                );
+
+            }
+        )
+
+    );
+
+}
+
+
+
+/* =====================================================
+   RESET PROGRESS BAR
+===================================================== */
+
+function resetProgressBar() {
+
+    if (!progressBar) {
+
+        return;
+
+    }
+
+
+    /*
+        Matikan transisi sementara
+        agar progress kembali ke 0
+        tanpa animasi mundur.
+    */
+
+    progressBar.style.transition =
+        "none";
+
+
+    progressBar.style.width =
+        "0%";
+
+
+    /*
+        Force browser melakukan
+        repaint sebelum animasi dimulai.
+    */
+
+    progressBar.offsetWidth;
+
+
+    /*
+        Progress berjalan selama
+        5 detik.
+    */
+
+    progressBar.style.transition =
+        `width ${slideDuration}ms linear`;
+
+
+    progressBar.style.width =
+        "100%";
+
+}
+
+
+
+/* =====================================================
+   CHANGE SLIDE
+===================================================== */
+
+function changeSlide() {
+
+    if (
+        slides.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+
+    /*
+        Slide sebelumnya.
+    */
+
+    const previousSlide =
+        slides[currentIndex];
+
+
+
+    /*
+        Pindah ke slide berikutnya.
+    */
+
+    currentIndex++;
+
+
+
+    /*
+        Setelah Home3 kembali
+        ke Home1.
+    */
+
+    if (
+        currentIndex >=
+        slides.length
+    ) {
+
+        currentIndex = 0;
+
+    }
+
+
+
+    /*
+        Slide berikutnya.
+    */
+
+    const nextSlide =
+        slides[currentIndex];
+
+
+
+    /*
+        Letakkan slide baru
+        di atas slide lama.
+    */
+
+    nextSlide.style.zIndex =
+        "2";
+
+
+    previousSlide.style.zIndex =
+        "1";
+
+
+
+    /*
+        Aktifkan slide baru.
+    */
+
+    nextSlide.classList.add(
+        "active"
+    );
+
+
+
+    /*
+        Update counter.
+    */
+
+    if (currentSlide) {
+
+        currentSlide.textContent =
+            String(
+                currentIndex + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+    }
+
+
+
+    /*
+        Setelah fade selesai,
+        matikan slide lama.
+    */
+
+    setTimeout(
+        function () {
+
+            previousSlide.classList.remove(
+                "active"
+            );
+
+            previousSlide.style.zIndex =
+                "0";
+
+        },
+        fadeDuration + 100
+    );
+
+
+
+    /*
+        Reset progress bar
+        untuk slide baru.
+    */
+
+    resetProgressBar();
+
+}
+
+
+
+/* =====================================================
+   START SLIDESHOW
+===================================================== */
+
+function startSlideshow() {
+
+    /*
+        Bersihkan timer lama.
+    */
+
+    if (slideTimer) {
+
+        clearInterval(
+            slideTimer
+        );
+
+    }
+
+
+
+    if (progressTimer) {
+
+        clearInterval(
+            progressTimer
+        );
+
+    }
+
+
+
+    /*
+        Reset semua slide.
+    */
+
+    slides.forEach(
+        function (slide, index) {
+
+            slide.classList.remove(
+                "active"
+            );
+
+            slide.style.zIndex =
+                "0";
+
+
+            if (
+                index === 0
+            ) {
+
+                slide.classList.add(
+                    "active"
+                );
+
+                slide.style.zIndex =
+                    "2";
+
+            }
+
+        }
+    );
+
+
+
+    /*
+        Mulai dari Home1.
+    */
+
+    currentIndex = 0;
+
+
+
+    /*
+        Counter.
+    */
+
+    if (currentSlide) {
+
+        currentSlide.textContent =
+            "01";
+
+    }
+
+
+
+    /*
+        Mulai progress.
+    */
+
+    resetProgressBar();
+
+
+
+    /*
+        Foto berganti setiap
+        5 detik.
+    */
+
+    slideTimer =
+        setInterval(
+            changeSlide,
+            slideDuration
+        );
+
+}
+
+
+
+/* =====================================================
+   LOAD IMAGES
+===================================================== */
+
+preloadAllImages()
+    .then(
+        function () {
+
+            startSlideshow();
+
+        }
+    )
+    .catch(
+        function () {
+
+            startSlideshow();
+
+        }
+    );
+
+
+
+/* =====================================================
+   2. NAVBAR SCROLL EFFECT
+===================================================== */
+
+function updateNavbar() {
+
+    if (!navbar) {
+
+        return;
+
+    }
+
+
+    /*
+        Setelah scroll lebih dari
+        30px, aktifkan glass navbar.
+    */
+
+    if (
+        window.scrollY > 30
+    ) {
+
+        navbar.classList.add(
+            "scrolled"
+        );
+
+    } else {
+
+        navbar.classList.remove(
+            "scrolled"
+        );
+
+    }
+
+}
+
+
+
+window.addEventListener(
+    "scroll",
+    updateNavbar,
+    {
+        passive: true
+    }
+);
+
+
+
+/*
+    Jalankan sekali saat halaman
+    pertama kali dibuka.
+*/
+
+updateNavbar();
+
+
+
+/* =====================================================
+   3. TYPING EFFECT
+===================================================== */
+
+const roles = [
+
+    "Warehouse Staff",
+
+    "Event PIC",
+
+    "Logistics Coordinator"
+
+];
+
+
+let roleIndex = 0;
+
+let letterIndex = 0;
+
+let deleting = false;
+
+
+const typeSpeed = 90;
+
+const deleteSpeed = 55;
+
+const pauseTime = 1800;
+
+
+
+/* =====================================================
+   TYPING ANIMATION
+===================================================== */
+
+function typingAnimation() {
+
+    if (!typingRole) {
+
+        return;
+
+    }
+
+
+
+    const currentRole =
+        roles[roleIndex];
+
+
+
+    /* =================================================
+       TYPING
+    ================================================== */
+
+    if (!deleting) {
+
+        typingRole.textContent =
+            currentRole.substring(
+                0,
+                letterIndex + 1
+            );
+
+
+        letterIndex++;
+
+
+        /*
+            Selesai mengetik.
+        */
+
+        if (
+            letterIndex >=
+            currentRole.length
+        ) {
+
+            deleting = true;
+
+
+            setTimeout(
+                typingAnimation,
+                pauseTime
+            );
+
+
+            return;
+
+        }
+
+
+        setTimeout(
+            typingAnimation,
+            typeSpeed
+        );
+
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       DELETING
+    ================================================== */
+
+    typingRole.textContent =
+        currentRole.substring(
+            0,
+            letterIndex - 1
+        );
+
+
+    letterIndex--;
+
+
+    /*
+        Selesai menghapus.
+    */
+
+    if (
+        letterIndex <= 0
+    ) {
+
+        letterIndex = 0;
+
+        deleting = false;
+
+
+        /*
+            Pindah ke role berikutnya.
         */
 
         roleIndex++;
@@ -62,3 +721,291 @@ if (
     );
 
 }
+
+
+
+/* =====================================================
+   5. CLOSE MOBILE MENU
+===================================================== */
+
+navLinks.forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                if (navMenu) {
+
+                    navMenu.classList.remove(
+                        "open"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   6. ACTIVE NAVIGATION
+===================================================== */
+
+navLinks.forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                navLinks.forEach(
+                    function (item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   TRUE GALLERY MASONRY
+========================= */
+
+(function () {
+
+    const gallery = document.querySelector('.gallery-masonry');
+
+    if (!gallery) return;
+
+    let originalItems = Array.from(
+        gallery.querySelectorAll('.gallery-item')
+    );
+
+    let currentColumns = 0;
+
+    function getColumnCount() {
+        if (window.innerWidth <= 600) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 900) {
+            return 2;
+        }
+
+        return 3;
+    }
+
+    function buildMasonry() {
+
+        const columnCount = getColumnCount();
+
+        if (columnCount === currentColumns) {
+            return;
+        }
+
+        currentColumns = columnCount;
+
+        /* Restore original items */
+        originalItems.forEach(item => {
+            gallery.appendChild(item);
+        });
+
+        /* Remove old columns */
+        gallery.querySelectorAll('.gallery-column').forEach(column => {
+            column.remove();
+        });
+
+        /* Mobile */
+        if (columnCount === 1) {
+            originalItems.forEach(item => {
+                gallery.appendChild(item);
+            });
+
+            return;
+        }
+
+        /* Create columns */
+        const columns = [];
+
+        for (let i = 0; i < columnCount; i++) {
+
+            const column = document.createElement('div');
+
+            column.className = 'gallery-column';
+
+            columns.push(column);
+
+            gallery.appendChild(column);
+        }
+
+        /* Put each image into the shortest column */
+        originalItems.forEach(item => {
+
+            let shortestColumn = columns[0];
+
+            columns.forEach(column => {
+
+                if (
+                    column.getBoundingClientRect().height <
+                    shortestColumn.getBoundingClientRect().height
+                ) {
+                    shortestColumn = column;
+                }
+
+            });
+
+            shortestColumn.appendChild(item);
+        });
+    }
+
+    function waitForImages() {
+
+        const images = gallery.querySelectorAll('img');
+
+        let loaded = 0;
+
+        if (images.length === 0) {
+            buildMasonry();
+            return;
+        }
+
+        images.forEach(img => {
+
+            if (img.complete) {
+
+                loaded++;
+
+                if (loaded === images.length) {
+                    buildMasonry();
+                }
+
+            } else {
+
+                img.addEventListener('load', function () {
+
+                    loaded++;
+
+                    if (loaded === images.length) {
+                        buildMasonry();
+                    }
+
+                }, { once: true });
+
+                img.addEventListener('error', function () {
+
+                    loaded++;
+
+                    if (loaded === images.length) {
+                        buildMasonry();
+                    }
+
+                }, { once: true });
+            }
+        });
+    }
+
+    waitForImages();
+
+    let resizeTimer;
+
+    window.addEventListener('resize', function () {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+
+            currentColumns = 0;
+
+            buildMasonry();
+
+        }, 200);
+
+    });
+
+})();
+
+/* =====================================================
+   PROJECT DETAIL
+   - Tidak mengubah text/HTML project asli.
+   - Card project diarahkan ke project.html melalui JS.
+===================================================== */
+
+(function setupProjectDetails() {
+
+    const projectCards = document.querySelectorAll(".project-card");
+
+    if (!projectCards.length) {
+        return;
+    }
+
+    const projectMap = {
+        "Inamarine": "inamarine",
+        "Indonesia Technology & Innovation": "technology",
+        "Indonesia Energy & Engineering Series": "iee",
+        "ALLPack Indonesia": "allpack",
+        "Plastics & Rubber Indonesia": "plastics-rubber",
+        "Manufacturing Indonesia": "manufacturing",
+        "BigBang 2025-2026": "bigbang",
+        "Uni-Global Retail Exhibition": "uni-global"
+    };
+
+    projectCards.forEach(function(card) {
+
+        const titleElement = card.querySelector(".project-info h3");
+
+        if (!titleElement) {
+            return;
+        }
+
+        const title = titleElement.textContent.trim();
+        const projectId = projectMap[title];
+
+        if (!projectId) {
+            return;
+        }
+
+        card.setAttribute("role", "link");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", "Lihat detail proyek " + title);
+
+        card.addEventListener("click", function() {
+            window.location.href =
+                "project.html?id=" +
+                encodeURIComponent(projectId);
+        });
+
+        card.addEventListener("keydown", function(event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+                event.preventDefault();
+
+                window.location.href =
+                    "project.html?id=" +
+                    encodeURIComponent(projectId);
+            }
+
+        });
+
+    });
+
+})();
