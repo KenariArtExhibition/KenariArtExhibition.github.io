@@ -23,16 +23,8 @@ showSlide(0);setInterval(()=>showSlide((current+1)%slides.length),slideDuration)
 const title='KENARI ART EXHIBITION';let ti=0;
 function typeTitle(){if(ti<=title.length){typedTitle.textContent=title.slice(0,ti++);setTimeout(typeTitle,90);}else{setTimeout(()=>{ti=0;typeTitle();},2200);}}typeTitle();
 
-const projects=[
- {category:'EXHIBITION CONTRACTOR',title:'KENARI ART — PROJECT 01',image:'assets/slide-1.jpg',text:'Selected exhibition work by Kenari Art. A project space for showcasing products, branding and visitor experience from concept through installation.'},
- {category:'CUSTOM DESIGN',title:'KENARI ART — PROJECT 02',image:'assets/slide-2.jpg',text:'Custom booth and brand space developed around the client identity, exhibition footprint and practical visitor flow.'},
- {category:'EVENT MANAGEMENT',title:'KENARI ART — PROJECT 03',image:'assets/slide-3.jpg',text:'Event production support focused on preparation, coordination and smooth execution on show day.'},
- {category:'EXHIBITION CONTRACTOR',title:'KENARI ART — PROJECT 04',image:'assets/slide-4.jpg',text:'Exhibition installation with attention to finishing, presentation and readiness before the event opens.'}
-];
-function openProject(index){const p=projects[index];modalImage.src=p.image;modalImage.alt=p.title;modalCategory.textContent=p.category;modalTitle.textContent=p.title;modalText.textContent=p.text;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');history.replaceState(null,'',`#projects-${index+1}`);}
-function closeProject(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');if(location.hash.startsWith('#projects-'))history.replaceState(null,'',location.pathname+location.search);}
-document.querySelectorAll('.project-card').forEach(card=>{const open=()=>openProject(Number(card.dataset.project));card.addEventListener('click',open);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
-modalClose.addEventListener('click',closeProject);document.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',closeProject));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeProject();});
+const projectCards=[...document.querySelectorAll('.project-card')];
+projectCards.forEach(card=>{const open=()=>{const id=card.dataset.project; window.location.href=`project-detail.html?project=${id}`;};card.addEventListener('click',open);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
 
 const contactForm=document.getElementById('contactForm');const formMessage=document.getElementById('formMessage');contactForm.addEventListener('submit',e=>{e.preventDefault();formMessage.textContent='Terima kasih. Pesanmu sudah siap dikirim. Hubungkan form ini ke email/WhatsApp Kenari Art untuk menerima pesan secara nyata.';contactForm.reset();});
 
