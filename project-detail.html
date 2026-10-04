@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kenari Art Exhibition project detail">
+<title>Project — KENARI ART EXHIBITION</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="project-detail-page">
+<header class="site-header">
+  <a class="brand" href="index.html#home"><img src="assets/kenari-art-logo.jpg" alt="Kenari Art"><span>KENARI ART</span></a>
+  <nav class="main-nav project-nav"><a href="index.html#about">ABOUT</a><a href="index.html#services">OUR SERVICE</a><a href="index.html#clients">OUR CLIENTS</a><a href="index.html#projects">PROJECTS</a><a href="index.html#contact">CONTACT</a></nav>
+</header>
+<main>
+  <section class="detail-hero"><div class="container"><a class="back-link" href="index.html#projects">← BACK TO PROJECTS</a><span id="detailCategory" class="eyebrow"></span><h1 id="detailTitle"></h1><p id="detailIntro"></p></div></section>
+  <section class="detail-gallery-section"><div class="container">
+    <div class="detail-main-image"><img id="detailMainImage" src="" alt=""></div>
+    <div class="gallery-controls"><button id="prevPhoto" aria-label="Foto sebelumnya">←</button><span id="galleryCount">01 / 05</span><button id="nextPhoto" aria-label="Foto berikutnya">→</button></div>
+    <div class="detail-thumbs" id="detailThumbs"></div>
+  </div></section>
+  <section class="detail-info"><div class="container detail-info-grid"><div><span class="eyebrow">PROJECT INFORMATION</span><h2 id="detailInfoTitle"></h2></div><div><p id="detailDescription"></p><a class="outline-button dark-button" href="index.html#contact">DISCUSS THIS PROJECT <span>→</span></a></div></div></section>
+</main>
+<footer><div class="container footer-inner"><span>© 2026 KENARI ART EXHIBITION</span><a href="index.html#projects">ALL PROJECTS ↑</a></div></footer>
+<script>
+const projects = Array.from({length:20},(_,i)=>({
+  id:i+1,
+  category:['MODULAR SYSTEM','CUSTOM BOOTH','EXHIBITION BUILD','EVENT MANAGEMENT'][i%4],
+  title:`KENARI ART — PROJECT ${String(i+1).padStart(2,'0')}`,
+  intro:'Selected exhibition and event work by Kenari Art.',
+  description:'Project gallery placeholder using the current assets from the website. Replace these images with the real project photographs when they are available.',
+  images:[1,2,3,4,5].map(n=>`assets/projects/project-${String(((i+n-1)%20)+1).padStart(2,'0')}.jpg`)
+}));
+const params=new URLSearchParams(location.search); const index=Math.max(0,Math.min(19,(parseInt(params.get('project'),10)||1)-1)); const p=projects[index];
+document.title=p.title+' — KENARI ART EXHIBITION';
+document.getElementById('detailCategory').textContent=p.category;
+document.getElementById('detailTitle').textContent=p.title;
+document.getElementById('detailIntro').textContent=p.intro;
+document.getElementById('detailInfoTitle').textContent=p.title;
+document.getElementById('detailDescription').textContent=p.description;
+const main=document.getElementById('detailMainImage'), thumbs=document.getElementById('detailThumbs'), count=document.getElementById('galleryCount'); let current=0;
+function show(n){current=(n+p.images.length)%p.images.length; main.src=p.images[current]; main.alt=p.title+' photo '+(current+1); count.textContent=String(current+1).padStart(2,'0')+' / '+String(p.images.length).padStart(2,'0'); [...thumbs.children].forEach((el,i)=>el.classList.toggle('active',i===current));}
+p.images.forEach((src,i)=>{const b=document.createElement('button');b.className='detail-thumb';b.innerHTML=`<img src="${src}" alt="${p.title} thumbnail ${i+1}">`;b.onclick=()=>show(i);thumbs.appendChild(b);});
+document.getElementById('prevPhoto').onclick=()=>show(current-1);document.getElementById('nextPhoto').onclick=()=>show(current+1);show(0);
+</script>
+</body>
+</html>
