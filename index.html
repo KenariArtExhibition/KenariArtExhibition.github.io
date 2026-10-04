@@ -1,208 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Kenari Art - Indonesia Exhibition Contractor</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kenari Art Exhibition — exhibition design, fabrication, and event solutions.">
+  <title>Kenari Art Exhibition</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
-
 <body>
+  <header class="navbar" id="navbar">
+    <a href="#home" class="brand" aria-label="Kenari Art home">
+      <img src="assets/kenari-art-logo.jpg" alt="Kenari Art" class="brand-logo">
+      <span>KENARI ART<span class="pink-dot">.</span></span>
+    </a>
+    <nav class="nav-menu" aria-label="Main navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#clients">Clients</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-background" aria-hidden="true">
+        <img src="assets/slide-1.jpg" class="hero-slide active" alt="">
+        <img src="assets/slide-2.jpg" class="hero-slide" alt="">
+        <img src="assets/slide-3.jpg" class="hero-slide" alt="">
+        <img src="assets/slide-4.jpg" class="hero-slide" alt="">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="pink-glow glow-one"></div>
+      <div class="pink-glow glow-two"></div>
 
-    <!-- =================================================
-         NAVBAR
-    ================================================== -->
+      <div class="hero-content">
+        <p class="eyebrow">EXHIBITION • CREATIVE • EXPERIENCE</p>
+        <h1 id="typing-title" aria-label="KENARI ART EXHIBITION"></h1><span class="typing-cursor" aria-hidden="true"></span>
+        <p class="hero-subtitle">Creating spaces that make brands, ideas, and people stand out.</p>
+        <a href="#about" class="hero-cta">Explore Kenari Art <span>↓</span></a>
+      </div>
 
-    <header class="navbar" id="navbar">
-
-        <a
-            href="#home"
-            class="logo"
-        >
-            KenariArt<span>.</span>
-        </a>
-
-
-        <nav class="nav-menu">
-
-            <a
-                href="#home"
-                class="active"
-            >
-                Home
-            </a>
-
-            <a href="#about">
-                About
-            </a>
-
-            <a href="#services">
-                Our Services
-            </a>
-
-            <a href="#clients">
-                Our Clients
-            </a>
-
-            <a href="#projects">
-                Projects
-            </a>
-
-            <a href="#contact">
-                Contact
-            </a>
-
-        </nav>
-
-
-        <button
-            class="menu-toggle"
-            aria-label="Open navigation menu"
-        >
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
-
-    </header>
-
-
-
-    <!-- =================================================
-         HOME
-    ================================================== -->
-
-    <section
-        id="home"
-        class="hero"
-    >
-
-        <div class="hero-background">
-
-            <img
-                src="assets/images/home1.jpg"
-                class="hero-slide active"
-                alt=""
-            >
-
-            <img
-                src="assets/images/home2.jpg"
-                class="hero-slide"
-                alt=""
-            >
-
-            <img
-                src="assets/images/home3.jpg"
-                class="hero-slide"
-                alt=""
-            >
-
-        </div>
-
-
-        <div class="hero-overlay"></div>
-
-
-        <!--<div class="hero-content">
-
-            <p class="hero-label">
-                PROFESSIONAL PORTFOLIO
-            </p>
-
-
-            <h1>
-                Niko Juliandarus
-            </h1>
-
-
-            <div class="hero-role">
-
-                <span id="typing-role"></span>
-
-                <span class="cursor">
-                    |
-                </span>
-
-            </div>
-
-
-            <p class="hero-description">
-                Warehouse Operations & Event PIC
-            </p>
-
-
-            <a
-                href="#experience"
-                class="hero-button"
-            >
-
-                <span>
-                    Explore My Experience
-                </span>
-
-                <span>
-                    ↓
-                </span>
-
-            </a>
-
-        </div> -->
-
-
-        <div class="hero-bottom">
-
-            <span>
-                Scroll to explore
-            </span>
-
-            <span>
-                2026
-            </span>
-
-        </div>
-
-
-        <div class="slide-counter">
-
-            <span id="current-slide">
-                01
-            </span>
-
-            <span class="counter-line"></span>
-
-            <span>
-                03
-            </span>
-
-        </div>
-
-
-        <div class="slide-progress">
-
-            <div
-                class="slide-progress-bar"
-                id="slide-progress-bar"
-            ></div>
-
-        </div>
-
+      <div class="hero-bottom">
+        <span>SCROLL TO EXPLORE</span>
+        <span>2026</span>
+      </div>
+      <div class="slide-counter"><span id="current-slide">01</span><i></i><span>04</span></div>
+      <div class="slide-progress"><div id="slide-progress-bar"></div></div>
     </section>
 
+    <section id="about" class="section about-section">
+      <div class="section-heading reveal">
+        <span class="section-number">01</span>
+        <p class="eyebrow pink-text">ABOUT KENARI ART</p>
+        <h2>We turn ideas into <em>experiences.</em></h2>
+      </div>
+      <div class="about-grid reveal">
+        <div>
+          <p class="lead">Kenari Art Exhibition is a creative exhibition and event partner focused on building memorable spaces for brands, organizations, and communities.</p>
+        </div>
+        <div>
+          <p>From the first concept to the final build, our approach combines visual storytelling, practical production, and careful project coordination. Every space is designed to communicate a clear identity while giving visitors an experience worth remembering.</p>
+          <a href="#services" class="text-link">Discover our services <span>↗</span></a>
+        </div>
+      </div>
+    </section>
 
+    <section id="services" class="section dark-section">
+      <div class="section-heading reveal">
+        <span class="section-number">02</span>
+        <p class="eyebrow pink-text">OUR SERVICES</p>
+        <h2>From concept to <em>reality.</em></h2>
+      </div>
+      <div class="service-grid">
+        <article class="service-card reveal"><span>01</span><h3>Custom Exhibition</h3><p>Creative booth concepts developed around your brand, message, audience, and space.</p></article>
+        <article class="service-card reveal"><span>02</span><h3>Modular System</h3><p>Flexible exhibition structures for efficient, polished, and scalable presentations.</p></article>
+        <article class="service-card reveal"><span>03</span><h3>Event Production</h3><p>Production coordination and on-site execution designed to keep every detail moving.</p></article>
+        <article class="service-card reveal"><span>04</span><h3>Creative Display</h3><p>Visual installations, brand displays, and spatial details that strengthen the visitor journey.</p></article>
+      </div>
+    </section>
+
+    <section id="clients" class="section clients-section">
+      <div class="section-heading centered reveal">
+        <span class="section-number">03</span>
+        <p class="eyebrow pink-text">OUR CLIENTS</p>
+        <h2>Built for brands with <em>purpose.</em></h2>
+      </div>
+      <div class="client-cloud reveal" aria-label="Client categories">
+        <span>FOOD & BEVERAGE</span><span>TECHNOLOGY</span><span>MANUFACTURING</span><span>RETAIL</span><span>EDUCATION</span><span>PUBLIC SECTOR</span><span>CREATIVE INDUSTRY</span><span>STARTUPS</span>
+      </div>
+      <p class="center-note reveal">And many more creative collaborations.</p>
+    </section>
+
+    <section id="projects" class="section dark-section projects-section">
+      <div class="section-heading reveal">
+        <span class="section-number">04</span>
+        <p class="eyebrow pink-text">PROJECTS</p>
+        <h2>A selection of our <em>work.</em></h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card reveal"><div class="project-image"><img src="assets/slide-1.jpg" alt="Exhibition project"></div><div class="project-meta"><span>EXHIBITION</span><h3>Brand Experience</h3><p>Concept • Fabrication • Installation</p></div></article>
+        <article class="project-card reveal"><div class="project-image"><img src="assets/slide-2.jpg" alt="Exhibition project"></div><div class="project-meta"><span>EVENT</span><h3>Creative Showcase</h3><p>Design • Production • Execution</p></div></article>
+        <article class="project-card reveal"><div class="project-image"><img src="assets/slide-3.jpg" alt="Exhibition project"></div><div class="project-meta"><span>DISPLAY</span><h3>Spatial Storytelling</h3><p>Creative Direction • Build</p></div></article>
+        <article class="project-card reveal"><div class="project-image"><img src="assets/slide-4.jpg" alt="Exhibition project"></div><div class="project-meta"><span>EXHIBITION</span><h3>Immersive Space</h3><p>Design • Fabrication • Experience</p></div></article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="contact-intro reveal">
+        <span class="section-number">05</span>
+        <p class="eyebrow pink-text">CONTACT US</p>
+        <h2>Have an idea?<br><em>Let's build it.</em></h2>
+        <p>Tell us a little about your upcoming exhibition, event, or creative project. We would love to explore the possibilities with you.</p>
+      </div>
+      <form class="contact-form reveal" action="#" method="post" onsubmit="return false;">
+        <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+        <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+        <label>Company<input type="text" name="company" placeholder="Company name"></label>
+        <label>Project Location<input type="text" name="location" placeholder="City / venue"></label>
+        <label class="full">Message<textarea name="message" rows="5" placeholder="Tell us about your project"></textarea></label>
+        <button class="submit-button" type="submit">Send Message <span>↗</span></button>
+      </form>
+      <div class="contact-footer reveal">
+        <div><span>EMAIL</span><a href="mailto:hello@kenariart.com">hello@kenariart.com</a></div>
+        <div><span>LOCATION</span><p>Jakarta, Indonesia</p></div>
+        <div><span>SOCIAL</span><p>@kenariart</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>© 2026 KENARI ART EXHIBITION.</span><span>CREATIVE SPACES. MEMORABLE EXPERIENCES.</span></footer>
+  <script src="js/script.js"></script>
 </body>
+</html>
