@@ -21,9 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
      2. TAHUN OTOMATIS DI FOOTER
      ========================================= */
   const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* =========================================
      3. FILTER PROJECTS
@@ -54,64 +52,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================
-     5. HERO SLIDER + TYPEWRITER
+     5. HERO SLIDER + TYPEWRITER (LOOPING)
      ========================================= */
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.slide-indicators .dot');
   const typewriterEl = document.getElementById('typewriter-text');
   const heroTitle = document.querySelector('.hero-title');
+  const heroCopy = document.querySelector('.hero-copy');
 
-  // Hentikan jika elemen hero tidak ditemukan (halaman lain)
   if (!slides.length || !typewriterEl) return;
 
-  const SLIDE_DURATION = 3000; // 3 detik per slide
-  let currentSlide = 0;
-  let typewriterStarted = false;
+  const SLIDE_DURATION = 3000;    // 3 detik per slide
+  const TEXT_HOLD_DURATION = 3500; // teks bertahan 3.5 detik sebelum hilang
+  const TYPE_SPEED = 120;         // kecepatan mengetik (ms)
 
-  /* Pindah ke slide tertentu */
+  let currentSlide = 0;
+  let slideTimer = null;
+  let typeTimer = null;
+  let isPaused = false;
+
+  /* ---------- Pindah slide ---------- */
   function goToSlide(index) {
     slides.forEach((s, i) => s.classList.toggle('active', i === index));
     dots.forEach((d, i) => d.classList.toggle('active', i === index));
     currentSlide = index;
   }
 
-  /* Auto-slide setiap 3 detik */
-  const slideInterval = setInterval(() => {
-    const nextSlide = (currentSlide + 1) % slides.length;
+  /* ---------- Reset teks ---------- */
+  function resetText() {
+    typewriterEl.innerHTML = '';
+    heroTitle.classList.remove('show-text', 'fade-out');
+    if (typeTimer) clearTimeout(typeTimer);
+  }
 
-    // Jika sudah kembali ke slide pertama (semua slide sudah tampil),
-    // hentikan slider & mulai efek typewriter
-    if (nextSlide === 0 && !typewriterStarted) {
-      typewriterStarted = true;
-      clearInterval(slideInterval);
-      goToSlide(0);
-      // Delay sedikit sebelum mengetik agar transisi slide selesai dulu
-      setTimeout(startTypewriter, 800);
-      return;
-    }
-
-    goToSlide(nextSlide);
-  }, SLIDE_DURATION);
-
-  /* Klik indikator dot untuk pindah slide manual */
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      if (typewriterStarted) return; // matikan manual saat typewriter jalan
-      clearInterval(slideInterval);
-      goToSlide(i);
-    });
-  });
-
-  /* =========================================
-     FUNGSI EFEK MENGETIK
-     ========================================= */
+  /* ---------- Mulai efek mengetik ---------- */
   function startTypewriter() {
     const text = 'KENARI ART\nEXHIBITION';
     let i = 0;
-    typewriterEl.textContent = '';
-
-    // Tampilkan hero title dengan animasi fade in
+    typewriterEl.innerHTML = '';
     heroTitle.classList.add('show-text');
+    heroTitle.classList.remove('fade-out');
 
     function type() {
       if (i < text.length) {
@@ -122,10 +102,72 @@ document.addEventListener('DOMContentLoaded', () => {
           typewriterEl.innerHTML += char;
         }
         i++;
-        setTimeout(type, 120); // kecepatan mengetik (ms)
+        typeTimer = setTimeout(type, TYPE_SPEED);
+      } else {
+        // Setelah selesai mengetik, tahan sebentar lalu fade out
+        typeTimer = setTimeout(() => {
+          heroTitle.classList.add('fade-out');
+
+          // Setelah fade out, mulai ulang slider dari slide pertama
+          typeTimer = setTimeout(() => {
+            resetText();
+            goToSlide(0);
+            startSlider();
+          }, 900);
+        }, TEXT_HOLD_DURATION);
       }
     }
     type();
   }
+
+  /* ---------- Jalankan slider ---------- */
+  function startSlider() {
+    if (slideTimer) clearInterval(slideTimer);
+
+    slideTimer = setInterval(() => {
+      if (isPaused) return;
+
+      const nextSlide = (currentSlide + 1) % slides.length;
+
+      // Jika sudah kembali ke slide pertama → teks mulai mengetik
+      if (nextSlide === 0) {
+        clearInterval(slideTimer);
+        slideTimer = null;
+        goToSlide(0);
+        // Delay agar transisi slide terakhir selesai dulu
+        typeTimer = setTimeout(startTypewriter, 900);
+        return;
+      }
+
+      goToSlide(nextSlide);
+    }, SLIDE_DURATION);
+  }
+
+  /* ---------- Klik dot indikator ---------- */
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      // Reset semua dan mulai dari slide yang diklik
+      if (slideTimer) clearInterval(slideTimer);
+      if (typeTimer) clearTimeout(typeTimer);
+      resetText();
+      goToSlide(i);
+      // Mulai slider lanjut dari slide yang dipilih
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % slides.length;
+        if (nextSlide === 0) {
+          clearInterval(slideTimer);
+          slideTimer = null;
+          goToSlide(0);
+          typeTimer = setTimeout(startTypewriter, 900);
+          return;
+        }
+        goToSlide(nextSlide);
+      }, SLIDE_DURATION);
+    });
+  });
+
+  /* ---------- Mulai semuanya ---------- */
+  goToSlide(0);
+  startSlider();
 
 });
