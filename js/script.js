@@ -534,11 +534,7 @@ updateNavbar();
 
 const roles = [
 
-    "Warehouse Staff",
-
-    "Event PIC",
-
-    "Logistics Coordinator"
+    "Kenari Art Exhibition Contractor"
 
 ];
 
