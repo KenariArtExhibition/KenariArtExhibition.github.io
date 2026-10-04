@@ -1,81 +1,211 @@
-/* =========================================
-   RESET & VARIABEL WARNA (PINK & HITAM)
-   ========================================= */
-:root {
-  --black: #0a0a0a;
-  --dark-grey: #1a1a1a;
-  --pink-neon: #ff2a7a;
-  --pink-soft: #ffb3d1;
-  --pink-dark: #cc0055;
-  --white: #ffffff;
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+}
+
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: var(--black);
-  color: var(--white);
-  line-height: 1.6;
-  overflow-x: hidden;
+    margin: 0;
+
+    background: #111;
+
+    color: #fff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x: hidden;
 }
 
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; display: block; }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.section { padding: 100px 0; background-color: var(--black); }
-.section.grey { background-color: var(--dark-grey); }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-/* =========================================
-   HEADER
-   ========================================= */
-.header {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  background-color: rgba(10, 10, 10, 0.95);
-  border-bottom: 1px solid var(--pink-neon);
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-}
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-}
-.brand {
-  background-color: var(--white);
-  padding: 8px 15px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
-}
-.brand:hover { background-color: var(--pink-soft); }
-.brand img { height: 45px; width: auto; object-fit: contain; }
 
-.menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
+button {
+    font-family: inherit;
 }
-.menu-btn span { display: block; width: 25px; height: 3px; background-color: var(--pink-neon); }
 
-.main-nav { display: flex; gap: 30px; }
-.main-nav a {
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  transition: color 0.3s;
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 85px;
+
+    padding: 0 6vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    z-index: 1000;
+
+    background:
+        rgba(10, 10, 10, 0);
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0);
+
+    transition:
+        background 0.4s ease,
+        backdrop-filter 0.4s ease,
+        -webkit-backdrop-filter 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
 }
-.main-nav a:hover { color: var(--pink-neon); }
+
+
+.navbar.scrolled {
+
+    background:
+        rgba(10, 10, 10, 0.68);
+
+    backdrop-filter:
+        blur(16px);
+
+    -webkit-backdrop-filter:
+        blur(16px);
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+    font-size: 24px;
+
+    font-weight: 600;
+
+    letter-spacing: -1px;
+
+    color: #fff;
+}
+
+
+.logo span {
+    opacity: 0.5;
+}
+
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.nav-menu {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 34px;
+
+}
+
+
+.nav-menu a {
+
+    position: relative;
+
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: 1.8px;
+
+    text-transform: uppercase;
+
+    transition:
+        color 0.3s ease;
+
+}
+
+
+.nav-menu a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 1px;
+
+    background: #fff;
+
+    transition:
+        width 0.3s ease;
+
+}
+
+
+.nav-menu a:hover {
+
+    color: #fff;
+
+}
+
+
+.nav-menu a:hover::after {
+
+    width: 100%;
+
+}
+
+
+.nav-menu a.active {
+
+    color: #fff;
+
+}
+
+
+.nav-menu a.active::after {
+
+    width: 100%;
+
+}
 
 /* ==================================================
    HOME
