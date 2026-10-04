@@ -10,11 +10,7 @@
   --white: #ffffff;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -27,12 +23,7 @@ body {
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .section { padding: 100px 0; background-color: var(--black); }
 .section.grey { background-color: var(--dark-grey); }
 
@@ -48,14 +39,12 @@ img { max-width: 100%; display: block; }
   z-index: 1000;
   backdrop-filter: blur(5px);
 }
-
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
 }
-
 .brand {
   background-color: var(--white);
   padding: 8px 15px;
@@ -76,12 +65,7 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   gap: 5px;
 }
-.menu-btn span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: var(--pink-neon);
-}
+.menu-btn span { display: block; width: 25px; height: 3px; background-color: var(--pink-neon); }
 
 .main-nav { display: flex; gap: 30px; }
 .main-nav a {
@@ -94,7 +78,7 @@ img { max-width: 100%; display: block; }
 .main-nav a:hover { color: var(--pink-neon); }
 
 /* =========================================
-   HERO SLIDER (4 FOTO + TYPEWRITER)
+   HERO SLIDER
    ========================================= */
 .hero {
   position: relative;
@@ -104,66 +88,49 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   background-color: var(--black);
 }
+.hero-slides { position: absolute; inset: 0; z-index: 1; }
 
-/* Container slide */
-.hero-slides {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-}
-
-/* Setiap slide */
 .hero-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   opacity: 0;
   transform: scale(1);
   transition: opacity 1.2s ease-in-out;
   will-change: opacity, transform;
 }
-
-/* Slide yang aktif: fade in + zoom out (Ken Burns effect) */
 .hero-slide.active {
   opacity: 1;
   animation: kenBurns 4s ease-out forwards;
 }
-
 @keyframes kenBurns {
   0%   { transform: scale(1); }
   100% { transform: scale(1.15); }
 }
 
-/* =====================
+/* =========================================
    GANTI URL GAMBAR DI SINI
-   ===================== */
-.slide-1 {
-  background-image: linear-gradient(135deg, #0a0a0a 0%, #cc0055 100%);
-  /* background-image: url('../assets/slide-1.jpg'); */
-}
-.slide-2 {
-  background-image: linear-gradient(135deg, #cc0055 0%, #ff2a7a 100%);
-  /* background-image: url('../assets/slide-2.jpg'); */
-}
-.slide-3 {
-  background-image: linear-gradient(135deg, #1a1a1a 0%, #ff2a7a 100%);
-  /* background-image: url('../assets/slide-3.jpg'); */
-}
-.slide-4 {
-  background-image: linear-gradient(135deg, #ff2a7a 0%, #0a0a0a 100%);
-  /* background-image: url('../assets/slide-4.jpg'); */
-}
+   ========================================= */
+.slide-1 { background-image: url('../assets/slide-1.jpg'); }
+.slide-2 { background-image: url('../assets/slide-2.jpg'); }
+.slide-3 { background-image: url('../assets/slide-3.jpg'); }
+.slide-4 { background-image: url('../assets/slide-4.jpg'); }
 
-/* Overlay gelap */
+/* Fallback warna jika gambar belum ada */
+.slide-1 { background-color: #1a0a12; }
+.slide-2 { background-color: #2a0a1a; }
+.slide-3 { background-color: #1a0a12; }
+.slide-4 { background-color: #2a0a1a; }
+
 .hero-shade {
   position: absolute;
   inset: 0;
   background: linear-gradient(to right, rgba(10, 10, 10, 0.85) 0%, rgba(10, 10, 10, 0.45) 100%);
-  z-index: -1;
+  z-index: 2;
 }
 
-/* Copy hero */
 .hero-copy {
   display: flex;
   flex-direction: column;
@@ -172,12 +139,12 @@ img { max-width: 100%; display: block; }
   padding-top: 150px;
   padding-bottom: 50px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-title small {
   display: block;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 3px;
   color: var(--pink-neon);
   margin-bottom: 15px;
@@ -185,28 +152,33 @@ img { max-width: 100%; display: block; }
   transition: opacity 0.5s ease;
 }
 
+/* ====== TEKS DIPERKECIL ====== */
 .hero-title h1 {
-  font-size: 80px;
-  line-height: 1.1;
-  font-weight: 800;
+  font-size: 42px;         /* sebelumnya 80px */
+  line-height: 1.15;
+  font-weight: 700;
   color: var(--white);
   text-transform: uppercase;
-  min-height: 260px; /* reservasi ruang agar layout tidak lompat */
+  letter-spacing: 2px;
+  min-height: 110px;
+  max-width: 700px;
 }
-
-/* Class untuk menampilkan teks setelah typewriter mulai */
 .hero-title.show-text small { opacity: 1; }
 
-/* Kursor berkedip */
 .cursor {
   color: var(--pink-neon);
   font-weight: 300;
   animation: blink 0.8s steps(2, start) infinite;
 }
-
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0; }
+}
+
+/* Efek fade out untuk teks */
+.hero-title.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
 .down {
@@ -219,7 +191,6 @@ img { max-width: 100%; display: block; }
   margin-top: auto;
 }
 
-/* Indikator slide (dot) */
 .slide-indicators {
   position: absolute;
   bottom: 30px;
@@ -227,9 +198,8 @@ img { max-width: 100%; display: block; }
   transform: translateX(-50%);
   display: flex;
   gap: 12px;
-  z-index: 3;
+  z-index: 4;
 }
-
 .slide-indicators .dot {
   width: 10px;
   height: 10px;
@@ -238,7 +208,6 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
   transition: background 0.3s, transform 0.3s;
 }
-
 .slide-indicators .dot.active {
   background-color: var(--pink-neon);
   transform: scale(1.3);
@@ -441,7 +410,7 @@ footer {
    RESPONSIVE
    ========================================= */
 @media (max-width: 992px) {
-  .hero-title h1 { font-size: 56px; min-height: 180px; }
+  .hero-title h1 { font-size: 34px; min-height: 90px; }
   .two-col { grid-template-columns: 1fr; gap: 30px; }
   .service-row { grid-template-columns: 1fr 1fr; }
   .project-grid { grid-template-columns: 1fr 1fr; }
@@ -464,7 +433,7 @@ footer {
   }
   .main-nav.show { display: flex; }
 
-  .hero-title h1 { font-size: 38px; min-height: 130px; }
+  .hero-title h1 { font-size: 26px; min-height: 70px; letter-spacing: 1px; }
   .section-intro h2 { font-size: 32px; }
   .service-row { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: 1fr; }
