@@ -23,14 +23,41 @@
 </main>
 <footer><div class="container footer-inner"><span>© 2026 KENARI ART EXHIBITION</span><a href="index.html#projects">ALL PROJECTS ↑</a></div></footer>
 <script>
-const projects = Array.from({length:20},(_,i)=>({
-  id:i+1,
-  category:['MODULAR SYSTEM','CUSTOM BOOTH','EXHIBITION BUILD','EVENT MANAGEMENT'][i%4],
-  title:`KENARI ART — PROJECT ${String(i+1).padStart(2,'0')}`,
-  intro:'Selected exhibition and event work by Kenari Art.',
-  description:'Project gallery placeholder using the current assets from the website. Replace these images with the real project photographs when they are available.',
-  images:[1,2,3,4,5].map(n=>`assets/projects/project-${String(((i+n-1)%20)+1).padStart(2,'0')}.jpg`)
-}));
+const projects = [
+  {id:1, name:'NEO', slug:'neo'},
+  {id:2, name:'AISHOW', slug:'aishow'},
+  {id:3, name:'HUT 67', slug:'hut67'},
+  {id:4, name:'IFEX', slug:'ifex'},
+  {id:5, name:'IFFINA', slug:'iffina'},
+  {id:6, name:'MBLOCK H', slug:'mblockH'},
+  {id:7, name:'INTERPOSE', slug:'interpose'},
+  {id:8, name:'INAGRITECH', slug:'inagritech'},
+  {id:9, name:'HUT 66', slug:'hut66'},
+  {id:10, name:'INTERPOSERESO', slug:'interposereso'},
+  {id:11, name:'MBLOCK U', slug:'mblockU'},
+  {id:12, name:'FESTIVAL', slug:'festival'}
+].map(p => {
+  const base = `assets/projects/${p.slug}/`;
+  const files = {
+    neo:['neo01.jpg','neo02.jpg','neo03.jpg','neo04.jpg','neo05.jpg'],
+    aishow:['aishow01.jpg','aishow02.jpg','aishow03.jpg','aishow04.jpg'],
+    hut67:['hut6701.jpg','hut6702.jpg','hut6703.jpg','hut6704.jpg','hut6705.jpg','hut6706.jpg','hut6707.jpg','hut6708.jpg'],
+    ifex:['ifex01.jpg','ifex02.jpg','ifex03.jpg','ifex04.jpg'],
+    iffina:['iffina01.jpg','iffina02.jpg','iffina03.jpg'],
+    mblockH:['mblockH01.jpg','mblockH02.jpg','mblockH03.jpg','mblockH04.jpg'],
+    interpose:['interpose01.jpg','interpose02.jpg','interpose03.jpg','interpose04.jpg','interpose05.jpg'],
+    inagritech:['inagritech01.jpg','inagritech02.jpg','inagritech03.jpg'],
+    hut66:['hut6601.jpg','hut6602.jpg','hut6603.jpg','hut6604.jpg','hut6605.jpg','hut6606.jpg','hut6607.jpg','hut6608.jpg','hut6609.jpg','hut6610.jpg'],
+    interposereso:['interposereso01.jpg','interposereso02.jpg','interposereso03.jpg','interposereso04.jpg','interposereso05.jpg','interposereso06.jpg','interposereso07.jpg','interposereso08.jpg'],
+    mblockU:['mblockU01.jpg'],
+    festival:['festival01.jpg','festival02.jpg','festival03.jpg']
+  }[p.slug];
+  return {
+    id:p.id, category:'PROJECT', title:p.name,
+    intro:p.name, description:'Selected exhibition work.',
+    images:files.map(file => base + file)
+  };
+});
 const params=new URLSearchParams(location.search); const index=Math.max(0,Math.min(19,(parseInt(params.get('project'),10)||1)-1)); const p=projects[index];
 document.title=p.title+' — KENARI ART EXHIBITION';
 document.getElementById('detailCategory').textContent=p.category;
