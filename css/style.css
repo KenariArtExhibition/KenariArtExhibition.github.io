@@ -14,22 +14,64 @@
 @media(max-width:900px){.service-photo-grid{grid-template-columns:1fr 1fr}.logo-client-grid{grid-template-columns:repeat(2,1fr)}.project-grid-20{grid-template-columns:repeat(2,1fr)}.detail-info-grid{grid-template-columns:1fr;gap:35px}.detail-thumbs{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:700px){.service-photo-grid,.project-grid-20{grid-template-columns:1fr}.logo-client-grid{grid-template-columns:repeat(2,1fr)}.service-photo{height:250px}.detail-hero{padding:135px 0 65px}.detail-gallery-section{padding:55px 0}.detail-main-image{height:70vh;min-height:420px}.detail-main-image img{max-height:none}.detail-thumbs{grid-template-columns:repeat(3,1fr)}.detail-thumb{height:78px}.project-nav{display:flex;gap:16px}.project-nav a{font-size:8px}}
 
-.whatsapp-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #e8e8e8;
-  text-decoration: none;
-  transition: .3s ease;
+.wa-card {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    max-width: 390px;
+    min-height: 68px;
+    background: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+    overflow: hidden;
+    transition: .3s ease;
+    margin-top: 18px;
 }
 
-.whatsapp-link:hover {
-  color: #25D366;
+.wa-card:hover {
+    transform: translateY(-3px);
+    background: #20bd5a;
 }
 
-.whatsapp-icon {
-  width: 25px;
-  height: 25px;
-  fill: #25D366;
-  flex-shrink: 0;
+.wa-logo {
+    width: 72px;
+    min-width: 72px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #20bd5a;
+}
+
+.wa-logo svg {
+    width: 38px;
+    height: 38px;
+    fill: #ffffff;
+}
+
+.wa-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 18px;
+    flex: 1;
+}
+
+.wa-text small {
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    opacity: .85;
+}
+
+.wa-text strong {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+.wa-arrow {
+    font-size: 24px;
+    padding: 0 20px;
 }
