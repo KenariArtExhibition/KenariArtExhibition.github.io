@@ -26,6 +26,28 @@ function typeTitle(){if(ti<=title.length){typedTitle.textContent=title.slice(0,t
 const projectCards=[...document.querySelectorAll('.project-card')];
 projectCards.forEach(card=>{const open=()=>{const id=card.dataset.project; window.location.href=`project-detail.html?project=${id}`;};card.addEventListener('click',open);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
 
-const contactForm=document.getElementById('contactForm');const formMessage=document.getElementById('formMessage');contactForm.addEventListener('submit',e=>{e.preventDefault();formMessage.textContent='Terima kasih. Pesanmu sudah siap dikirim. Hubungkan form ini ke email/WhatsApp Kenari Art untuk menerima pesan secara nyata.';contactForm.reset();});
+const contactForm=document.getElementById('contactForm');
+const formMessage=document.getElementById('formMessage');
+if(contactForm){
+  contactForm.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const button=contactForm.querySelector('button[type="submit"]');
+    const originalText=button.innerHTML;
+    button.disabled=true;
+    button.innerHTML='SENDING...';
+    formMessage.textContent='';
+    try{
+      const response=await fetch(contactForm.action,{method:'POST',body:new FormData(contactForm),headers:{Accept:'application/json'}});
+      if(!response.ok) throw new Error('send_failed');
+      formMessage.textContent='Thank you. Your message has been sent successfully.';
+      contactForm.reset();
+    }catch(error){
+      formMessage.textContent='Sorry, your message could not be sent. Please email hello@kenariart.id directly.';
+    }finally{
+      button.disabled=false;
+      button.innerHTML=originalText;
+    }
+  });
+}
 
 const sections=[...document.querySelectorAll('main section[id]')];const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${entry.target.id}`));}}),{rootMargin:'-40% 0px -50% 0px'});sections.forEach(s=>observer.observe(s));
