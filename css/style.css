@@ -160,24 +160,3 @@
     color: #25D366 !important;
 
     flex-shrink: 0 !important;
-}
-
-/* Perpanjang logo di navbar */
-.site-logo img,
-.navbar-logo img,
-.brand-logo img {
-    width: 130px !important;
-    height: auto !important;
-    max-width: none !important;
-    object-fit: contain;
-}
-
-/* Tampilan mobile */
-@media (max-width: 768px) {
-    .site-logo img,
-    .navbar-logo img,
-    .brand-logo img {
-        width: 130px !important;
-        height: auto !important;
-    }
-}
