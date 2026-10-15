@@ -180,3 +180,11 @@
     opacity: 1 !important;
     mix-blend-mode: normal !important;
 }
+
+.clients-grid {
+    border: none !important;
+}
+
+.clients-grid > * {
+    border: none !important;
+}
