@@ -188,3 +188,26 @@
 .clients-grid > * {
     border: none !important;
 }
+
+/* Google Maps location in the contact section */
+.contact-details .contact-map {
+    width: 100%;
+    max-width: 100%;
+    height: 290px;
+    margin-top: 18px;
+    overflow: hidden;
+    border: 1px solid #38212b;
+    background: #111;
+}
+.contact-details .contact-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(0.12) contrast(0.96);
+}
+@media (max-width: 700px) {
+    .contact-details .contact-map {
+        height: 280px;
+    }
+}
