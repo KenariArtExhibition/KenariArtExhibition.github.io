@@ -211,3 +211,176 @@
         height: 280px;
     }
 }
+
+
+
+
+/* =====================================
+   MOBILE RESPONSIVE FIX
+   KENARI ART EXHIBITION
+===================================== */
+
+/* NAVBAR: tidak lagi selalu menempel */
+.site-header {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100%;
+    z-index: 50;
+}
+
+/* INDEX: HERO FULL SCREEN MOBILE */
+.hero {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+/* MENCEGAH KONTEN MELEBIHI LAYAR */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+    /* NAVBAR INDEX */
+    .site-header {
+        height: 70px;
+        padding: 0 5vw;
+        position: relative !important;
+        background: #090909;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+    }
+
+    /* HERO FULL SCREEN */
+    .hero {
+        height: 100svh;
+        min-height: 600px;
+        width: 100%;
+    }
+
+    .hero-content {
+        left: 6vw;
+        right: 6vw;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+    }
+
+    .hero h1 {
+        font-size: clamp(34px, 10vw, 48px);
+        line-height: 1.05;
+        letter-spacing: -1.5px;
+        overflow-wrap: break-word;
+    }
+
+    .hero-copy {
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 100%;
+    }
+
+    .hero-meta {
+        left: 6vw;
+        right: 6vw;
+        bottom: 20px;
+        font-size: 8px;
+    }
+
+    /* SECTION */
+    .section {
+        padding: 65px 0;
+    }
+
+    .container {
+        width: 88%;
+        max-width: 100%;
+    }
+
+    /* PROJECT */
+    .project-grid,
+    .project-grid-20 {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .project-image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        height: auto;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* PROJECT DETAIL */
+    .detail-hero {
+        padding: 65px 0 45px;
+    }
+
+    .detail-main-image {
+        width: 100%;
+        height: 55vh;
+        min-height: 280px;
+    }
+
+    .detail-main-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .detail-thumbs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .detail-thumb {
+        height: 75px;
+    }
+
+    /* PROJECT NAVBAR */
+    .project-detail-page .site-header {
+        height: auto;
+        min-height: 70px;
+        padding: 15px 5vw;
+        flex-wrap: wrap;
+        position: relative !important;
+    }
+
+    .project-nav {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 8px 16px;
+        margin-top: 12px;
+    }
+
+    .project-nav a {
+        font-size: 9px;
+    }
+}
+
