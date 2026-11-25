@@ -384,3 +384,75 @@ img {
     }
 }
 
+
+/* ===== OUR SERVICE: CENTER ALIGNMENT ===== */
+
+.service-section .section-head.split-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.service-section .section-head.split-head > div {
+    width: 100%;
+    text-align: center;
+}
+
+.service-section .section-head.split-head > p {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+/* ===== PROJECT DETAIL: MOBILE NAVBAR ===== */
+
+@media (max-width: 700px) {
+
+    .project-detail-page .site-header {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        height: 70px;
+        padding: 0 5vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #090909;
+    }
+
+    .project-detail-page .menu-toggle {
+        display: block;
+        cursor: pointer;
+        width: 38px;
+        padding: 0;
+    }
+
+    .project-detail-page .main-nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 25px 5vw;
+        background: #090909;
+        border-bottom: 2px solid #ff2b83;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        z-index: 100;
+    }
+
+    .project-detail-page .main-nav.open {
+        display: flex;
+    }
+
+    .project-detail-page .main-nav a {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+}
+
+
