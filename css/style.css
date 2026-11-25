@@ -456,3 +456,101 @@ img {
 }
 
 
+
+/* =================================
+   FIX OUR SERVICE MOBILE
+================================= */
+
+@media (max-width: 700px) {
+
+    /* Section Service */
+    .service-section {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .service-section .container {
+        width: 88%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Judul dan deskripsi center */
+    .service-section .section-head {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .service-section .section-head > div {
+        width: 100%;
+        text-align: center;
+    }
+
+    .service-section .section-head h2 {
+        text-align: center;
+        font-size: clamp(36px, 9vw, 52px);
+    }
+
+    .service-section .section-head > p {
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto 0;
+        text-align: center;
+    }
+
+    /* Grid foto */
+    .service-photo-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+        max-width: 100%;
+        gap: 28px;
+        overflow: hidden;
+    }
+
+    /* Card */
+    .service-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    /* Foto */
+    .service-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+
+    .service-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    /* Tulisan dalam card */
+    .service-copy {
+        width: 100%;
+        min-width: 0;
+        padding: 24px 20px 28px;
+        overflow-wrap: break-word;
+    }
+
+    .service-copy h3 {
+        font-size: clamp(16px, 4.5vw, 20px);
+        line-height: 1.3;
+    }
+
+    .service-copy p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+}
+
+
